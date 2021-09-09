@@ -1,0 +1,38 @@
+.idea
+.vscode
+.subl
+
+# Byte-compiled / optimized / DLL files
+*.py[cod]
+*$py.class
+
+.hypothesis
+
+# virtualenv
+venv/
+VENV/
+.venv/
+.VENV/
+
+**/.DS_Store
+**/__pycache__
+allure-report/
+reports/*
+!reports/.gitkeep
+
+# CTags
+.tags*
+tags
+TAGS
+
+# Local Trash
+**/test_test/
+**/test_test*.py
+/.mypy_cache/
+/.pytest_cache/
+.magicindex.json
+*.sublime*
+.history/
+.q_file_picker/
+.temp
+pytest.ini
