@@ -39,7 +39,7 @@ class ExampleApi:
         return ApiEndpoint(
             url=self.url,
             http_method=Method.GET,
-            path="/{custom_value}",
+            path="/status/{codes}",
         ).do_request(tests_args=args,
                      tests_kwargs=kwargs)
 

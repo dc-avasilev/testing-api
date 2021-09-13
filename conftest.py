@@ -75,7 +75,7 @@ def env(request) -> str:
 
 
 @pytest.fixture(scope='session', autouse=True)
-def global_config() -> ExtDict:
+def global_config() -> config:
     return config
 
 

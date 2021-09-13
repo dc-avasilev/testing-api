@@ -7,7 +7,7 @@ from utils.db import (
 
 
 @pytest.fixture(scope='session')
-def db_example(env: str, global_config, request):
+def db_example(env: str, global_config, request) -> Postgres:
     return Postgres(PostgresConnectionManager(
         global_config.db.example_pg[env],
         request
