@@ -6,7 +6,14 @@ from typing import Type
 
 import pytest
 
-from config import config
+from config import (
+    config,
+    is_needed_request_logs,
+    is_needed_sql_logs,
+    local_env_dblogin,
+    local_env_dbpassword,
+    proxy
+)
 from model.helpers import (
     JsonHelper,
     YamlHelper
@@ -93,8 +100,14 @@ def tupledict() -> Type[TupleDict]:
 
 
 @pytest.fixture(scope='session', autouse=True)
-def metadata_for_tests(metadata, env):
+def metadata_for_tests(metadata, env, global_config):
     metadata['Test environment'] = env
+    metadata['test_request_logs'] = is_needed_request_logs
+    metadata['test_sql_logs'] = is_needed_sql_logs
+    metadata['db_login'] = local_env_dblogin
+    metadata['db_password'] = local_env_dbpassword
+    metadata['proxy'] = proxy
+    metadata['global_config'] = global_config
 
 
 def _rotate_report(path: Path, limit: int, counter=1):
