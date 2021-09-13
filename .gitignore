@@ -36,3 +36,4 @@ TAGS
 .q_file_picker/
 .temp
 pytest.ini
+**/reports/

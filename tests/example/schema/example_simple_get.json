@@ -1,0 +1,59 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "required": [
+        "args",
+        "headers",
+        "origin",
+        "url"
+    ],
+    "properties": {
+        "args": {
+            "type": "object",
+            "required": [
+                "foo"
+            ],
+            "properties": {
+                "foo": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "headers": {
+            "type": "object",
+            "required": [
+                "Accept",
+                "Accept-Encoding",
+                "Host",
+                "User-Agent",
+                "X-Amzn-Trace-Id"
+            ],
+            "properties": {
+                "Accept": {
+                    "type": "string"
+                },
+                "Accept-Encoding": {
+                    "type": "string"
+                },
+                "Host": {
+                    "type": "string"
+                },
+                "User-Agent": {
+                    "type": "string"
+                },
+                "X-Amzn-Trace-Id": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "origin": {
+            "type": "string"
+        },
+        "url": {
+            "type": "string"
+        }
+    },
+    "additionalProperties": false
+}

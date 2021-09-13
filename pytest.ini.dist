@@ -1,0 +1,30 @@
+[pytest]
+junit_family = xunit2
+addopts =
+    --test_env=dev
+    --cache-clear
+    --clean-alluredir
+    --self-contained-html
+    --html=reports/html/report.html
+    --alluredir=reports/allure
+    --junitxml=reports/xml/report.xml
+    -p no:sugar
+    -vvv
+;    --max-reports=100
+;    -n auto
+;    --count=10
+;    --hypothesis-show-statistics
+;    --dup-fixtures
+;    --dead-fixtures
+;    --fulltrace
+;    --setup-show
+;    --fixtures-per-test
+;    --verbose
+;    --fixtures
+filterwarnings =
+    ignore::pytest.PytestWarning
+    ignore:.*U.*mode is deprecated:DeprecationWarning
+    ignore:Unverified HTTPS request is being made to host
+markers =
+    simple_get: run only simple_get tests
+    simple_post: run only simple_post tests
