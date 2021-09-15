@@ -21,8 +21,8 @@ class ExampleApi:
         """
         return ApiEndpoint(
             url=self.url,
-            http_method=Method.GET,
-            path="/get",
+            method=Method.GET,
+            path_url="/get",
         ).do_request(tests_args=args,
                      tests_kwargs=kwargs)
 
@@ -38,8 +38,8 @@ class ExampleApi:
         """
         return ApiEndpoint(
             url=self.url,
-            http_method=Method.GET,
-            path="/status/{codes}",
+            method=Method.GET,
+            path_url="/status/{codes}",
         ).do_request(tests_args=args,
                      tests_kwargs=kwargs)
 
@@ -55,8 +55,8 @@ class ExampleApi:
         """
         return ApiEndpoint(
             url=self.url,
-            http_method=Method.POST,
-            path="/post",
+            method=Method.POST,
+            path_url="/post",
             headers={
                 "Content-Type": "application/json"
             },

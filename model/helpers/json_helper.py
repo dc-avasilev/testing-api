@@ -46,4 +46,7 @@ class AlternateJsonEncoder(json.JSONEncoder):
     def default(self, o):
         if isinstance(o, datetime):
             return o.isoformat()
+        if isinstance(o, bytes):
+            import ast
+            return ast.literal_eval(o.decode())
         return json.JSONEncoder.default(self, o)

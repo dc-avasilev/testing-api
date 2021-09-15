@@ -4,10 +4,9 @@ from random import (
 )
 from uuid import uuid4
 
+from faker import Factory
 from faker.providers import BaseProvider
 from faker.providers.bank.ru_RU import Provider
-
-from faker import Factory
 
 
 class ExampleDataProvider(BaseProvider):

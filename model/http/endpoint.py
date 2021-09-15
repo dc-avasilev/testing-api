@@ -28,8 +28,8 @@ from utils.wait import response_waiter
 @dataclass
 class ApiEndpoint:
     url: str
-    http_method: str
-    path: str
+    method: str
+    path_url: str
     headers: dict = field(default_factory=dict)
     cookies: dict = field(default_factory=dict)
     comment: str = field(default_factory=str)
@@ -39,7 +39,7 @@ class ApiEndpoint:
     _proxy: str = proxy
 
     def __str__(self):
-        return f'{self.http_method} {self.path} - headers={self.headers}'
+        return f'{self.method} {self.path_url} - headers={self.headers}'
 
     @staticmethod
     def _check_url(url):
@@ -84,7 +84,7 @@ class ApiEndpoint:
                 request.headers[key] = str(value)
 
         response = _request(
-            method=request.http_method,
+            method=request.method,
             url=self._check_url(request.url),
             data=body,
             headers=request.headers if hasattr(request, 'headers') else None,
@@ -106,15 +106,18 @@ class ApiEndpoint:
                                                         **tests_kwargs)
         response: Response = self.fire(prepared_request)
         if Logger.log_request_reponse:
-            Logger.append_http(prepared_request, response,
-                               comment=tests_kwargs.get("comment"))
+            Logger.append_http(Request.parse(
+                response.original_response.request
+            ), response,
+                comment=tests_kwargs.get("comment"))
         return response
 
     def _build_request(self, *args, **kwargs) -> Request:
         builder_params = {
-            'http_method': self.http_method,
+            'method': self.method,
             'host': self.url,
-            'path': self._substitute_path_vars(self.path, *args, **kwargs)
+            'path_url': self._substitute_path_vars(self.path_url, *args,
+                                                   **kwargs)
         }
 
         if kwargs.get('headers'):
@@ -149,8 +152,9 @@ class ApiEndpoint:
         return Request.build(**builder_params)
 
     @staticmethod
-    def _substitute_path_vars(path, *args, **kwargs):
-        path_vars = [item[1] for item in Formatter().parse(path) if item[1]]
+    def _substitute_path_vars(path_url, *args, **kwargs):
+        path_vars = [item[1]
+                     for item in Formatter().parse(path_url) if item[1]]
         if path_vars:
             request_params = list(args) + [kwargs[x] for x in path_vars if
                                            kwargs.get(x)]
@@ -161,5 +165,5 @@ class ApiEndpoint:
             else:
                 var_to_param = {x: request_params[i] for i, x in
                                 enumerate(path_vars)}
-                path = path.format(**var_to_param)
-        return path
+                path_url = path_url.format(**var_to_param)
+        return path_url

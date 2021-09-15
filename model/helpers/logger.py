@@ -83,7 +83,7 @@ class Logger:
             response = item.data.get('response')
 
             with allure.step(
-                comment or f'{request.http_method} {request.url}'):
+                comment or f'{request.method} {request.url}'):
                 allure.attach(
                     name=f'Request',
                     body=str(request),

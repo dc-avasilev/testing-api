@@ -8,10 +8,10 @@ import pytest_html.extras
 class BaseLogger:
     @staticmethod
     def _pretty_request(request, service):
-        return f'{request.http_method} ' \
+        return f'{request.method} ' \
                f'{service.protocol}://' \
                f'{service.host}' \
-               f'{request.path}' \
+               f'{request.path_url}' \
                f'{urllib.parse.unquote_plus(request.query_string)}\n' \
                f'{request.formatted_headers}' \
                f'{request.formatted_body}'
@@ -22,7 +22,7 @@ class AllureLogger(BaseLogger):
     def attach_request(self, request, service):
         log = self._pretty_request(request, service)
         allure.attach(
-            name=f'{request.http_method} {request.path}',
+            name=f'{request.method} {request.path_url}',
             body=log,
             attachment_type=allure.attachment_type.JSON
         )

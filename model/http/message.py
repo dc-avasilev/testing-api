@@ -39,7 +39,7 @@ class Message:
         result = ''
         if hasattr(self, 'headers'):
             for key, value in self.headers.items():
-                result += '\n-H "{}: {}" \\'.format(key, value)
+                result += f'\n-H "{key}: {value}" \\'
             result += '\n'
         return result
 
@@ -48,7 +48,7 @@ class Message:
         result = ''
         if hasattr(self, 'headers'):
             for key, value in self.headers.items():
-                result += '\n{}: {}'.format(key, value)
+                result += f'\n{key}: {value}'
             result += '\n'
         return result
 
