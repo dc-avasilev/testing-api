@@ -1,6 +1,7 @@
 import json
 import os
 import re
+from configparser import ConfigParser
 from pathlib import Path
 from typing import Type
 
@@ -22,9 +23,7 @@ from utils.altcollections import (
     ExtDict,
     TupleDict
 )
-from utils.faker import (
-    Fake
-)
+from utils.faker import Fake
 
 
 # """Фикстуры сервисов"""
@@ -100,7 +99,7 @@ def tupledict() -> Type[TupleDict]:
 
 
 @pytest.fixture(scope='session', autouse=True)
-def metadata_for_tests(metadata, env, global_config):
+def metadata_for_tests(metadata, env, global_config, project_root):
     metadata['Test environment'] = env
     metadata['test_request_logs'] = is_needed_request_logs
     metadata['test_sql_logs'] = is_needed_sql_logs
@@ -108,6 +107,11 @@ def metadata_for_tests(metadata, env, global_config):
     metadata['db_password'] = local_env_dbpassword
     metadata['proxy'] = proxy
     metadata['global_config'] = global_config
+
+    cfg = ConfigParser()
+    cfg.read(f'{project_root}/pytest.ini')
+    pytestini = {s: dict(cfg.items(s)) for s in cfg.sections()}
+    metadata['pytest.ini'] = json.dumps(pytestini)
 
 
 def _rotate_report(path: Path, limit: int, counter=1):
