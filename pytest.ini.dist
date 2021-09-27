@@ -9,7 +9,7 @@ addopts =
     --alluredir=reports/allure
     --junitxml=reports/xml/report.xml
     -p no:sugar
-    -vvv
+    -v
 ;    --max-reports=100
 ;    -n auto
 ;    --count=10

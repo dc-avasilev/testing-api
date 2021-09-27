@@ -1,34 +1,21 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "type": "object",
-    "required": [
-        "args",
-        "headers",
-        "origin",
-        "url"
-    ],
+    "additionalProperties": false,
     "properties": {
         "args": {
-            "type": "object",
-            "required": [
-                "foo"
-            ],
+            "additionalProperties": false,
             "properties": {
                 "foo": {
                     "type": "string"
                 }
             },
-            "additionalProperties": false
+            "required": [
+                "foo"
+            ],
+            "type": "object"
         },
         "headers": {
-            "type": "object",
-            "required": [
-                "Accept",
-                "Accept-Encoding",
-                "Host",
-                "User-Agent",
-                "X-Amzn-Trace-Id"
-            ],
+            "additionalProperties": false,
             "properties": {
                 "Accept": {
                     "type": "string"
@@ -46,7 +33,14 @@
                     "type": "string"
                 }
             },
-            "additionalProperties": false
+            "required": [
+                "Accept",
+                "Accept-Encoding",
+                "Host",
+                "User-Agent",
+                "X-Amzn-Trace-Id"
+            ],
+            "type": "object"
         },
         "origin": {
             "type": "string"
@@ -55,5 +49,11 @@
             "type": "string"
         }
     },
-    "additionalProperties": false
+    "required": [
+        "args",
+        "headers",
+        "origin",
+        "url"
+    ],
+    "type": "object"
 }

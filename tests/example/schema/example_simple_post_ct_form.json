@@ -17,7 +17,18 @@
         },
         "form": {
             "additionalProperties": false,
-            "required": [],
+            "properties": {
+                "bar": {
+                    "type": "string"
+                },
+                "foo": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "bar",
+                "foo"
+            ],
             "type": "object"
         },
         "headers": {
@@ -61,20 +72,7 @@
             "type": "object"
         },
         "json": {
-            "additionalProperties": false,
-            "properties": {
-                "bar": {
-                    "type": "string"
-                },
-                "foo": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "bar",
-                "foo"
-            ],
-            "type": "object"
+            "type": "null"
         },
         "origin": {
             "type": "string"

@@ -18,10 +18,10 @@ class Message:
     def formatted_body(self):
         result = ''
         if hasattr(self, 'body'):
-            result += '--data \'' + json.dumps(self.body,
-                                               indent=4,
-                                               ensure_ascii=False,
-                                               cls=AlternateJsonEncoder) + "'"
+            if not isinstance(self.body, bytes):
+                result += f"--data '{json.dumps(self.body, indent=4, ensure_ascii=False, cls=AlternateJsonEncoder)}'"
+            else:
+                result += f"--data '{self.body.decode()}'"
         return result
 
     @property

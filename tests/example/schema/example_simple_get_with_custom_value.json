@@ -1,20 +1,9 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "type": "object",
-    "required": [
-        "headers"
-    ],
+    "additionalProperties": false,
     "properties": {
         "headers": {
-            "type": "object",
-            "required": [
-                "Accept",
-                "Accept-Encoding",
-                "Foo",
-                "Host",
-                "User-Agent",
-                "X-Amzn-Trace-Id"
-            ],
+            "additionalProperties": false,
             "properties": {
                 "Accept": {
                     "type": "string"
@@ -35,8 +24,19 @@
                     "type": "string"
                 }
             },
-            "additionalProperties": false
+            "required": [
+                "Accept",
+                "Accept-Encoding",
+                "Foo",
+                "Host",
+                "User-Agent",
+                "X-Amzn-Trace-Id"
+            ],
+            "type": "object"
         }
     },
-    "additionalProperties": false
+    "required": [
+        "headers"
+    ],
+    "type": "object"
 }
