@@ -1,4 +1,3 @@
-# import mysql.connector
 from abc import (
     ABC,
     abstractmethod
@@ -15,60 +14,16 @@ from utils.altcollections import RecursiveConverter
 class SQLDB(ABC):
 
     @abstractmethod
-    def select_one(self, query, logging=None):
+    def select_one(self, query):
         pass
 
     @abstractmethod
-    def select_all(self, query, logging=None):
+    def select_all(self, query):
         pass
 
     @abstractmethod
     def execute(self, query):
         pass
-
-
-# class MySql(SQLDB):
-#
-#     def __init__(self, connection, database=None):
-#         self._connection = connection
-#         if database:
-#             self._connection.database = database
-#
-#     def __str__(self):
-#         if self._connection.is_connected():
-#             string = 'Connected to {info} on {host}:{port}'.format(
-#                 info=self._connection.database,
-#                 host=self._connection.server_host,
-#                 port=self._connection.server_port)
-#         else:
-#             string = 'No connection'
-#         return '\n--------------\n{}\n--------------'.format(string)
-#
-#     def select_one(self, query, logging=None):
-#         cursor = self._connection.cursor(dictionary=True, buffered=True)
-#         cursor.execute(query)
-#         self._connection.commit()
-#         result = cursor.fetchone()
-#         Logger.append_sql(query, result) if logging else ...
-#         return RecursiveConverter(result)
-#
-#     def select_all(self, query, logging=None):
-#         cursor = self._connection.cursor(dictionary=True, buffered=True)
-#         cursor.execute(query)
-#         self._connection.commit()
-#         result = cursor.fetchall()
-#         Logger.append_sql(query, result) if logging else ...
-#         return RecursiveConverter(result)
-#
-#     def execute(self, query):
-#         cursor = self._connection.cursor(buffered=True)
-#         try:
-#             cursor.execute(query)
-#             if cursor.rowcount > 0:
-#                 self._connection.commit()
-#         except:
-#             self._connection.rollback()
-#         return cursor.rowcount
 
 
 class Postgres(SQLDB):
@@ -172,26 +127,6 @@ class ConnectionManager(ABC):
             remote_bind_address=(self.config['db_host'], self.config['db_port'])
         )
         self.tunnel.start()
-
-
-# class MysqlConnectionManager(ConnectionManager):
-#
-#     def connect_with_tunnel(self):
-#         return mysql.connector.MySQLConnection(
-#             user=self.config['db_user'],
-#             password=self.config['db_password'],
-#             host=self.tunnel.local_bind_host,
-#             port=self.tunnel.local_bind_port
-#         )
-#
-#     def connect_direct(self):
-#         return mysql.connector.MySQLConnection(
-#             user=self.config['db_user'],
-#             password=self.config['db_password'],
-#             database=self.config['db_name'],
-#             host=self.config['db_host'],
-#             port=self.config['db_port']
-#         )
 
 
 class PostgresConnectionManager(ConnectionManager):

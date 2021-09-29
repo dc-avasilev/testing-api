@@ -26,11 +26,12 @@ class YamlHelper:
     def _parse_file(file_name, dirs, service_name=None):
         matches = []
         for folder in dirs:
-            if (
-                service_name
-                and folder.parts[-1] == service_name
-                or not service_name
-            ):
+            if service_name:
+                if folder.parts[-1] == service_name:
+                    for file in folder.iterdir():
+                        if file.parts[-1] == file_name:
+                            matches.append(file)
+            else:
                 for file in folder.iterdir():
                     if file.parts[-1] == file_name:
                         matches.append(file)
