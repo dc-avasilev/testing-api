@@ -1,13 +1,13 @@
 # mysql-connector-python==8.0.26
-allure-pytest==2.9.43
-allure-python-commons==2.9.43
+allure-pytest==2.9.44
+allure-python-commons==2.9.44
 deepdiff==5.5.0
-Faker==8.12.1
+Faker==8.14.0
 genson==1.2.2
-jsonschema==3.2.0
+jsonschema==4.0.1
 lxml==4.6.3
-more-itertools==8.8.0
-pre-commit==2.14.1
+more-itertools==8.10.0
+pre-commit==2.15.0
 psycopg2-binary==2.9.1
 PyJWT==2.1.0
 pytest-asyncio==0.15.1
@@ -16,7 +16,7 @@ pytest-metadata==1.11.0
 pytest-repeat==0.9.1
 pytest-sugar==0.9.4
 pytest-timeout==1.4.2
-pytest-xdist==2.3.0
+pytest-xdist==2.4.0
 pytest==6.2.5
 python-dateutil==2.8.2
 python-magic==0.4.24
@@ -27,5 +27,5 @@ sshtunnel==0.4.0
 StrEnum==0.4.6
 testit-pytest==0.2.9
 text-unidecode==1.3
-urllib3==1.26.6
+urllib3==1.26.7
 xmltodict==0.12.0

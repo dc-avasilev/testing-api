@@ -12,16 +12,14 @@ from jsonschema import (
     RefResolver,
     validate
 )
-from jsonschema.compat import urlopen
 from jsonschema.exceptions import (
     SchemaError,
     ValidationError
 )
+from jsonschema.validators import urlopen
 from lxml import etree
 
-from model.helpers import (
-    JsonHelper
-)
+from model.helpers import JsonHelper
 from utils.altcollections import RecursiveConverter
 from .message import (
     MediaType,
