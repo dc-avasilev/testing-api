@@ -4,7 +4,7 @@ from copy import deepcopy
 import allure
 import pytest_html.extras
 
-from config import (
+from my_config import (
     is_needed_request_logs,
     is_needed_sql_logs
 )
@@ -83,9 +83,10 @@ class Logger:
             response = item.data.get('response')
 
             with allure.step(
-                comment or f'{request.method} {request.url}'):
+                    comment or f'{request.method} {request.url}'
+            ):
                 allure.attach(
-                    name=f'Request',
+                    name='Request',
                     body=str(request),
                     attachment_type=allure.attachment_type.JSON
                 )

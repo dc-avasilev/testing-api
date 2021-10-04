@@ -13,7 +13,7 @@ from requests import (
 )
 from urllib3.filepost import encode_multipart_formdata
 
-from config import proxy
+from my_config import proxy
 from model.helpers import (
     AlternateJsonEncoder,
     Logger

@@ -7,7 +7,7 @@ from typing import Type
 
 import pytest
 
-from config import (
+from my_config import (
     config,
     is_needed_request_logs,
     is_needed_sql_logs,
@@ -16,6 +16,7 @@ from config import (
     proxy
 )
 from model.helpers import (
+    AlternateJsonEncoder,
     JsonHelper,
     YamlHelper
 )
@@ -107,11 +108,19 @@ def metadata_for_tests(metadata, env, global_config, project_root):
     metadata['db_password'] = local_env_dbpassword
     metadata['proxy'] = proxy
     metadata['global_config'] = global_config
+    metadata['project_root'] = project_root
+    metadata['environ'] = json.dumps(dict(os.environ),
+                                     indent=4,
+                                     ensure_ascii=False,
+                                     cls=AlternateJsonEncoder)
 
     cfg = ConfigParser()
     cfg.read(f'{project_root}/pytest.ini')
     pytestini = {s: dict(cfg.items(s)) for s in cfg.sections()}
-    metadata['pytest.ini'] = json.dumps(pytestini)
+    metadata['pytest.ini'] = json.dumps(pytestini,
+                                        indent=4,
+                                        ensure_ascii=False,
+                                        cls=AlternateJsonEncoder)
 
 
 def _rotate_report(path: Path, limit: int, counter=1):
@@ -166,7 +175,6 @@ def pytest_sessionstart(session):
 def pytest_addoption(parser):
     parser.addoption('--test_env', action='store', default='qa',
                      help='Test run environment: qa')
-    # parser.addoption('--prometheus', action='store_true')
     parser.addoption(
         "--runslow", action="store_true", default=False,
         help="run slow tests"
