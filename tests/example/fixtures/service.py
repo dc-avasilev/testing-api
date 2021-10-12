@@ -1,6 +1,6 @@
 import pytest
 
-from routes.example import ExampleApi
+from routes import ExampleApi
 
 
 @pytest.fixture(scope='session')

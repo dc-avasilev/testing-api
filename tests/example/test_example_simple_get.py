@@ -1,6 +1,6 @@
 import pytest
 
-from tests.example.fixtures.service import ExampleApi
+from routes import ExampleApi
 
 
 @pytest.mark.simple_get
