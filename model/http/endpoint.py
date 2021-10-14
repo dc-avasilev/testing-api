@@ -21,6 +21,7 @@ from model.helpers import (
 from model.http.message import MediaType
 from model.http.request import Request
 from model.http.response import Response
+from my_config import proxy
 from utils.altcollections import ExtDict
 from utils.wait import response_waiter
 
