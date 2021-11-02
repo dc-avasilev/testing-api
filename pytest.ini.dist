@@ -1,7 +1,7 @@
 [pytest]
 junit_family = xunit2
 addopts =
-    --test_env=dev
+    --test_env=qa
     --cache-clear
     --clean-alluredir
     --self-contained-html
