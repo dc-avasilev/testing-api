@@ -1,23 +1,14 @@
 import json
 from copy import deepcopy
-from dataclasses import (
-    dataclass,
-    field
-)
+from dataclasses import dataclass, field
 from string import Formatter
 from urllib.parse import urlparse
 
-from requests import (
-    exceptions,
-    request as _request
-)
+from requests import exceptions
+from requests import request as _request
 from urllib3.filepost import encode_multipart_formdata
 
-from my_config import proxy
-from model.helpers import (
-    AlternateJsonEncoder,
-    Logger
-)
+from model.helpers import AlternateJsonEncoder, Logger
 from model.http.message import MediaType
 from model.http.request import Request
 from model.http.response import Response

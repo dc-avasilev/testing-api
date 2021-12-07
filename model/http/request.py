@@ -33,7 +33,7 @@ class Request(Message):
               f'{self.formatted_headers}' \
               f'{self.formatted_body}'
         if msg[len(msg) - 2:len(msg) - 1] == '\\':
-            msg = msg[0:len(msg) - 3] + '\n'
+            msg = msg[:len(msg) - 3] + '\n'
         return msg
 
     def __str__(self):
