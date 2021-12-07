@@ -8,24 +8,16 @@ from xml.parsers.expat import ExpatError
 import pytest
 import xmltodict
 import yaml
-from jsonschema import (
-    RefResolver,
-    validate
-)
-from jsonschema.exceptions import (
-    SchemaError,
-    ValidationError
-)
+from jsonschema import RefResolver, validate
+from jsonschema.exceptions import SchemaError, ValidationError
 from jsonschema.validators import urlopen
 from lxml import etree
 
 from model.helpers import JsonHelper
-from utils.altcollections import RecursiveConverter
-from .message import (
-    MediaType,
-    Message
-)
+from utils.altcollections import DictDiff, RecursiveConverter
+from utils.json_pretty_print import json_pretty_print
 
+from .message import MediaType, Message
 
 STATUS_NAMES = [x for x in HTTPStatus.__dict__ if not x.startswith('_')]
 STATUS_CODE_NAME = {getattr(HTTPStatus, x): x for x in STATUS_NAMES}
@@ -80,6 +72,16 @@ class Response(Message):
                 )
             pytest.fail(f'{e}\n\nschema_file_name: {schema_file_name}\n'
                         f'response:{self}\n{additional_info}\n')
+        return True
+
+    def check_body_diff_with(self,
+                             expected_response,
+                             *args,
+                             **kwargs):
+        diff = DictDiff(expected_response, self.body)
+
+        assert diff.to_dict() == {}, f"diff={json_pretty_print(diff.to_json())}"
+
         return True
 
     @property
