@@ -148,7 +148,7 @@ def pytest_configure(config):
         schema = service / 'schema'
         data = service / 'data'
 
-        if global_schema.exist():
+        if global_schema.exists():
             JsonHelper.schema_dirs.append(global_schema)
         if schema.exists():
             JsonHelper.schema_dirs.append(schema)
