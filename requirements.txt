@@ -5,7 +5,7 @@
 allure-pytest==2.9.45
 allure-python-commons==2.9.45
 deepdiff==5.8.0
-Faker==13.4.0
+Faker==13.6.0
 genson==1.2.2
 jsonschema==4.4.0
 more-itertools==8.12.0
