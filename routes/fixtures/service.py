@@ -6,7 +6,7 @@ from routes import ExampleApi
 @pytest.fixture(scope='session')
 def example(env: str, extdict) -> ExampleApi:
     environments = extdict({
-        "dev": {
+        "qa": {
             "url": "https://httpbin.org"
         }
     })

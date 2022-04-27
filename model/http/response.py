@@ -1,5 +1,4 @@
 from http import HTTPStatus
-from io import BytesIO
 from json import loads
 from json.decoder import JSONDecodeError
 from pathlib import Path
@@ -8,16 +7,27 @@ from xml.parsers.expat import ExpatError
 import pytest
 import xmltodict
 import yaml
-from jsonschema import RefResolver, validate
-from jsonschema.exceptions import SchemaError, ValidationError
+from jsonschema import (
+    RefResolver,
+    validate
+)
+from jsonschema.exceptions import (
+    SchemaError,
+    ValidationError
+)
 from jsonschema.validators import urlopen
-from lxml import etree
 
 from model.helpers import JsonHelper
-from utils.altcollections import DictDiff, RecursiveConverter
+from utils.altcollections import (
+    DictDiff,
+    RecursiveConverter
+)
 from utils.json_pretty_print import json_pretty_print
+from .message import (
+    MediaType,
+    Message
+)
 
-from .message import MediaType, Message
 
 STATUS_NAMES = [x for x in HTTPStatus.__dict__ if not x.startswith('_')]
 STATUS_CODE_NAME = {getattr(HTTPStatus, x): x for x in STATUS_NAMES}
@@ -153,10 +163,7 @@ class XMLBodyParser(BaseBodyParser):
     @classmethod
     def parse(cls, raw_body):
         try:
-            parser = etree.XMLParser(ns_clean=True)
-            xml_parse = etree.parse(BytesIO(raw_body), parser)
-            encoding = xml_parse.docinfo.encoding
-            body = xmltodict.parse(raw_body, encoding=str(encoding))
+            body = xmltodict.parse(raw_body, encoding='utf-8')
         except ExpatError:
             body = BaseBodyParser.parse(raw_body)
         return body

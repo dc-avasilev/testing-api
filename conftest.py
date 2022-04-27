@@ -29,8 +29,8 @@ from utils.faker import Fake
 
 # """Фикстуры сервисов"""
 pytest_plugins = [
-    'tests.example.fixtures.service',
-    'tests.example.fixtures.db_example_fixtures'
+    'routes.fixtures.service',
+    'routes.fixtures.db_example_fixtures'
 ]
 
 # """Фикстуры общего назначения"""
@@ -141,12 +141,15 @@ def pytest_configure(config):
     config.addinivalue_line("markers", "slow: mark test as slow to run")
     project_root = Path(config.rootdir)
     services = project_root / 'tests'
+    global_schema = project_root / 'global_jsonschema'
 
     for service in [x for x in services.iterdir() if
                     x.is_dir() and x.parts[-1] != '__pycache__']:
         schema = service / 'schema'
         data = service / 'data'
 
+        if global_schema.exist():
+            JsonHelper.schema_dirs.append(global_schema)
         if schema.exists():
             JsonHelper.schema_dirs.append(schema)
         if data.exists():

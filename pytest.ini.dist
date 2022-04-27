@@ -2,14 +2,14 @@
 junit_family = xunit2
 addopts =
     --test_env=qa
+    --junitxml=reports/xml/report.xml
     --cache-clear
-    --clean-alluredir
     --self-contained-html
     --html=reports/html/report.html
+    --clean-alluredir
     --alluredir=reports/allure
-    --junitxml=reports/xml/report.xml
-    -p no:sugar
-    -v
+;    -p no:sugar
+;    -v
 ;    --max-reports=100
 ;    -n auto
 ;    --count=10
